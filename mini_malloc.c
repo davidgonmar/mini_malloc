@@ -1,6 +1,8 @@
 #include "mini_malloc.h"
 #include <stdbool.h>
 #include <stddef.h>
+#include <string.h>
+
 
 /**
  * Header struct that is used to keep track of the size of the block, whether
