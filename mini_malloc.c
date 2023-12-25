@@ -103,6 +103,15 @@ void *mini_malloc(size_t size) {
   return new_block + 1;
 }
 
+void *mini_calloc(size_t num, size_t size) {
+  size_t total_size = num * size;
+
+  void *ptr = mini_malloc(total_size);
+  memset(ptr, 0, total_size);
+
+  return ptr;
+}
+
 void mini_free(void *ptr) {
 
   // This is a valid case
