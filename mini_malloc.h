@@ -26,4 +26,12 @@ void mini_free(void *ptr);
  */
 void *mini_calloc(size_t n_elem, size_t elem_size);
 
+/**
+ * @brief Reallocate a block of memory previously allocated by mini_malloc.
+ * @param ptr A pointer to the memory block to reallocate.
+ * @param size The new size in bytes of the memory block.
+ * @return A pointer to the reallocated memory block.
+ */
+void *mini_realloc(void *ptr, size_t size);
+
 #endif // MINI_MALLOC_H_

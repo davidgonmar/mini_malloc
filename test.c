@@ -53,6 +53,26 @@ int main() {
   assert(point4[0].x == 0);
   assert(point4[0].y == 0);
 
+  // Tests for mini_realloc
+
+  int *int_arr = (int *)mini_malloc(3 * sizeof(int));
+  assert(int_arr != NULL);
+  int_arr[0] = 10;
+  int_arr[1] = 11;
+  int_arr[2] = 12;
+
+  int *new_int_arr = (int *)mini_realloc(int_arr, 5 * sizeof(int));
+  assert(new_int_arr != NULL);
+  assert(new_int_arr[0] == 10);
+  assert(new_int_arr[1] == 11);
+  assert(new_int_arr[2] == 12);
+
+  new_int_arr[3] = 13;
+  new_int_arr[4] = 14;
+
+  assert(new_int_arr[3] == 13);
+  assert(new_int_arr[4] == 14);
+
   printf("All tests passed!\n");
 
   return 0;

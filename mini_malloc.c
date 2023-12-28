@@ -3,7 +3,6 @@
 #include <stddef.h>
 #include <string.h>
 
-
 /**
  * Header struct that is used to keep track of the size of the block, whether
  * it is used or not, and a pointer to the next block.
@@ -112,6 +111,29 @@ void *mini_calloc(size_t num, size_t size) {
   memset(ptr, 0, total_size);
 
   return ptr;
+}
+
+static Header *get_block_header(void *ptr) { return (Header *)ptr - 1; }
+
+void *mini_realloc(void *ptr, size_t size) {
+  void *new_ptr = NULL;
+
+  if (size > 0) {
+
+    if (ptr == NULL) {
+      return mini_malloc(size);
+    }
+    new_ptr = mini_malloc(size);
+
+    // In case the allocation failed, new_ptr would be NULL and we should not
+    // copy into it. Else, we copy contents into new pointer and free old.
+    if (new_ptr != NULL) {
+      Header *old_ptr_header = get_block_header(ptr);
+      memcpy(new_ptr, ptr, old_ptr_header->size);
+      mini_free(ptr);
+    }
+  }
+  return new_ptr;
 }
 
 void mini_free(void *ptr) {
