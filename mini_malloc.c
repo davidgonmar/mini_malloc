@@ -69,7 +69,7 @@ void *mini_malloc(size_t size) {
   // First case, we found a free block!
   if (free_block != NULL) {
     free_block->used = true;
-    return (char *)free_block + sizeof(Header);
+    return free_block + 1;
   }
 
   // Second case, no free block found, we need to allocate a new one
